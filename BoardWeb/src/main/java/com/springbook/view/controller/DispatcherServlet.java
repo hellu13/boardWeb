@@ -64,6 +64,7 @@ public class DispatcherServlet extends HttpServlet {
 			} else {
 				response.sendRedirect("login.jsp");
 			}
+			
 		} else if(path.equals("/logout.do")) {
 			System.out.println("로그아웃 처리");
 		} else if(path.equals("/insertBoard.do")) {
@@ -89,6 +90,26 @@ public class DispatcherServlet extends HttpServlet {
 			
 		} else if(path.equals("/update.do")) {
 			System.out.println("글 수정 처리");
+			
+			// 1. 사용자 입력 정보 추출
+			String title = request.getParameter("title");
+			String writer = request.getParameter("writer");
+			String content = request.getParameter("content");
+			String seq = request.getParameter("seq");
+			
+			// 2. DB 연동 처리
+			BoardVO vo = new BoardVO();
+			vo.setTitle(title);
+			vo.setWriter(writer);
+			vo.setContent(content);
+			vo.setSeq(seq);
+			
+			BoardDAO boardDAO = new BoardDAO();
+			boardDAO.insertBoard(vo);
+			
+			// 3. 화면 네비게이션
+			response.sendRedirect("getBoardList.do");
+			
 		} else if(path.equals("/deleteBoard.do")) {
 			System.out.println("글 삭제 처리");
 		} else if(path.equals("/getBoard.do")) {
