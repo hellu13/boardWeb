@@ -9,6 +9,7 @@ import com.springbook.view.controller.Controller;
 
 public class LoginController implements Controller{
 	
+	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("로그인 처리");
