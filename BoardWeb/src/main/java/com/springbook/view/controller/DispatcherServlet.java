@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.impl.BoardDAO;
-import com.springbook.biz.user.UserVO;
-import com.springbook.biz.user.impl.UserDAO;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -46,24 +44,6 @@ public class DispatcherServlet extends HttpServlet {
 		if(path.equals("/login.do")) {
 			System.out.println("로그인 처리");
 			
-			// 1. 사용자 입력 정보 추출
-			String id = request.getParameter("id");
-			String password = request.getParameter("password");
-			
-			// 2. DB 연동 처리
-			UserVO vo = new UserVO();
-			vo.setId(id);
-			vo.setPassword(password);
-			
-			UserDAO userDAO = new UserDAO();
-			UserVO user = userDAO.getUser(vo);
-			
-			// 3. 화면 네비게이션
-			if(user != null) {
-				response.sendRedirect("getBoardList.do");
-			} else {
-				response.sendRedirect("login.jsp");
-			}
 			
 		} else if(path.equals("/logout.do")) {
 			System.out.println("로그아웃 처리");
